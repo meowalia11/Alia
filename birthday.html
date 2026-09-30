@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Happy Birthday Alia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Cairo:wght@400;600;700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* Want your own font file? Drop it next to this page and uncomment:
+  @font-face{ font-family:'MyFont'; src:url('myfont.ttf'); }
+  then put 'MyFont' first in --display / --arabic below. */
+  :root{
+    --blush-100:#FFF3EC; --blush-200:#FBDCE4; --blush-300:#F3B8C9;
+    --wine-900:#5A2233; --wine-700:#7A3247; --rose-500:#D9436C; --rose-050:#FFF9F6; --paper:#FFFBF8;
+    --display:'Pacifico',cursive; --arabic:'Cairo',sans-serif; --ui:'Outfit',sans-serif;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth}
+  body{margin:0;font-family:var(--ui);color:var(--wine-900);
+    background:radial-gradient(circle at 15% 10%,var(--blush-200),transparent 55%),radial-gradient(circle at 90% 85%,var(--blush-300),transparent 50%),var(--blush-100)}
+  section{min-height:100svh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:56px 22px}
+  .eyebrow{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--rose-500);font-weight:600;margin:0 0 14px}
+  h1,h2{font-family:var(--display);font-weight:400;margin:0 0 18px;line-height:1.3}
+  h1{font-size:clamp(34px,10vw,50px)} h2{font-size:clamp(26px,7vw,32px)}
+  p.sub{font-size:15px;line-height:1.6;color:var(--wine-700);max-width:340px;margin:0 auto}
+  .btn{display:inline-block;padding:11px 24px;border-radius:999px;border:none;background:var(--rose-500);color:var(--rose-050);
+    font:600 14px var(--ui);cursor:pointer;text-decoration:none;box-shadow:0 10px 22px -12px rgba(217,67,108,.7);transition:transform .12s}
+  .btn:active{transform:scale(.95)} .btn.ghost{background:transparent;color:var(--wine-700);border:1.5px solid var(--blush-300);box-shadow:none}
+  .card{background:var(--paper);border:1.5px solid var(--blush-300);border-radius:20px;padding:22px;width:100%;max-width:380px;box-shadow:0 20px 40px -22px rgba(90,34,51,.25)}
+  .top-nav{position:fixed;top:12px;left:12px;z-index:20}
+  .top-nav .btn{padding:8px 16px;font-size:12.5px;background:var(--paper);color:var(--wine-700);border:1.5px solid var(--blush-300);box-shadow:none}
+
+  /* timers */
+  .timers{display:flex;flex-direction:column;gap:14px;width:100%;max-width:380px}
+  .t-card{background:var(--paper);border:1.5px solid var(--blush-300);border-radius:18px;padding:18px}
+  .t-card.done{border-color:var(--rose-500)}
+  .t-date{font-family:var(--display);font-size:20px}
+  .badge{display:inline-block;margin:8px 0;padding:4px 12px;border-radius:999px;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase}
+  .badge.done{background:var(--rose-500);color:var(--rose-050)} .badge.pending{background:var(--blush-200);color:var(--wine-700)}
+  .cd{display:flex;gap:8px;justify-content:center}
+  .cd div{background:var(--blush-100);border-radius:12px;padding:10px 0;min-width:62px}
+  .cd b{font:400 24px var(--display);display:block} .cd span{font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--wine-700)}
+  .t-note{font-size:13px;color:var(--wine-700);margin:0}
+
+  /* letter */
+  .ar{direction:rtl;font-family:var(--arabic);text-align:right;line-height:1.95;font-size:17px}
+  .letter{max-width:400px;width:100%;margin-top:18px;max-height:0;overflow:hidden;opacity:0;transition:opacity .6s}
+  .letter.open{max-height:none;opacity:1}
+  .letter .card{padding:26px 22px}
+  .letter h3{font-family:var(--arabic);font-weight:700;font-size:21px;color:var(--rose-500);margin:22px 0 6px;direction:rtl;text-align:right}
+  .r-item{opacity:0;transform:translateY(10px);transition:all .5s}
+  .r-item.in{opacity:1;transform:none}
+  .r-item::before{content:'♥ ';color:var(--rose-500);font-size:14px}
+  .final{font-size:26px;color:var(--rose-500);text-align:center;margin-top:16px;font-weight:700}
+
+  /* games */
+  .game{margin-bottom:0}
+  .g-meta{display:flex;justify-content:space-between;align-items:center;font-size:13px;color:var(--wine-700);margin-bottom:12px}
+  #catchArea{position:relative;height:280px;border-radius:14px;background:var(--blush-100);overflow:hidden;touch-action:manipulation;user-select:none}
+  .fall{position:absolute;top:-40px;font-size:30px;cursor:pointer;animation:fall linear forwards}
+  @keyframes fall{to{transform:translateY(340px)}}
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+  .mc{aspect-ratio:1;border:1.5px solid var(--blush-300);border-radius:14px;background:linear-gradient(160deg,var(--rose-500),var(--blush-300));
+    font-size:26px;color:transparent;cursor:pointer;padding:0;transition:transform .3s}
+  .mc.up{background:var(--paper);color:inherit;transform:rotateY(0)} .mc.ok{border-color:var(--rose-500)}
+  .cake{font-size:54px;line-height:1} .candles{display:flex;gap:16px;justify-content:center;font-size:30px;margin:10px 0 4px;min-height:40px}
+  .candles span{transition:opacity .4s,transform .4s} .candles span.off{opacity:.25;transform:scale(.8)}
+  .burst{position:fixed;pointer-events:none;z-index:50;font-size:20px;animation:burst 1.2s ease-out forwards}
+  @keyframes burst{to{transform:translate(var(--x),var(--y));opacity:0}}
+  footer{padding:40px 22px 60px;text-align:center}
+</style>
+</head>
+<body>
+<div class="top-nav"><a class="btn" href="index.html">← Our Story</a></div>
+
+<section id="hero">
+  <p class="eyebrow">1 October</p>
+  <h1>Happy Birthday,<br>Alia 🎂</h1>
+  <p class="sub">B34A9K YA MOZETYYYY</p>
+  <p style="margin-top:30px"><a class="btn" href="#timers">Let's go ↓</a></p>
+</section>
+
+<section id="timers">
+  <p class="eyebrow">the birthdays</p>
+  <h2>Timeline</h2>
+  <div class="timers">
+    <div class="t-card done">
+      <div class="t-date">1 October 2025</div>
+      <span class="badge done">✓ Done</span>
+      <p class="t-note" id="since25"></p>
+    </div>
+    <div class="t-card" id="card26">
+      <div class="t-date">1 October 2026</div>
+      <span class="badge pending" id="badge26">Pending</span>
+      <div class="cd" id="cd26"></div>
+    </div>
+    <div class="t-card" id="card27">
+      <div class="t-date">1 October 2027</div>
+      <span class="badge pending" id="badge27">Pending</span>
+      <div class="cd" id="cd27"></div>
+    </div>
+  </div>
+</section>
+
+<section id="letter-sec">
+  <p class="eyebrow">for you</p>
+  <h2>A letter</h2>
+  <button class="btn" id="openBtn">Open the letter 💌</button>
+  <div class="letter" id="letter">
+    <div class="card ar" id="letterBody"></div>
+  </div>
+</section>
+
+<section id="games">
+  <p class="eyebrow">just for fun</p>
+  <h2>Mini games</h2>
+
+  <div class="card game" style="margin-bottom:22px">
+    <h3 style="font-family:var(--display);font-weight:400;margin:0 0 10px">Catch the hearts</h3>
+    <div class="g-meta"><span id="cScore">Score: 0</span><span id="cTime">Time: 20</span></div>
+    <div id="catchArea"></div>
+    <p style="margin:14px 0 0"><button class="btn" id="cStart">Start</button></p>
+  </div>
+
+  <div class="card game" style="margin-bottom:22px">
+    <h3 style="font-family:var(--display);font-weight:400;margin:0 0 10px">Match the pairs</h3>
+    <div class="g-meta"><span id="mStatus">Moves: 0</span><button class="btn ghost" id="mReset" style="padding:6px 14px;font-size:12px">Shuffle</button></div>
+    <div class="grid" id="mGrid"></div>
+  </div>
+
+  <div class="card game">
+    <h3 style="font-family:var(--display);font-weight:400;margin:0 0 6px">Make a wish</h3>
+    <div class="cake">🎂</div>
+    <div class="candles" id="candles"></div>
+    <p class="t-note" id="wishMsg">Close your eyes, make a wish, then blow.</p>
+    <p style="margin:14px 0 0"><button class="btn" id="blowBtn">Blow the candles 💨</button></p>
+  </div>
+</section>
+
+<footer>
+  <p class="sub" style="margin-bottom:16px">Made with ♥ for Alia</p>
+  <a class="btn" href="index.html">← Back to Our Story</a>
+</footer>
+
+<script>
+  const $ = id => document.getElementById(id);
+  function burst(n){
+    for(let i=0;i<n;i++){
+      const h=document.createElement('span');h.className='burst';h.textContent=['♥','🎉','✨','🎈'][i%4];
+      h.style.left=(20+Math.random()*60)+'vw';h.style.top=(40+Math.random()*30)+'vh';
+      h.style.setProperty('--x',(Math.random()-.5)*200+'px');h.style.setProperty('--y',(-80-Math.random()*220)+'px');
+      document.body.appendChild(h);setTimeout(()=>h.remove(),1300);
+    }
+  }
+
+  /* ---- timers ---- */
+  const d25 = new Date('2025-10-01T00:00:00');
+  function countdown(year){
+    const diff = new Date(year + '-10-01T00:00:00') - new Date();
+    if(diff <= 0){
+      $('badge'+year.slice(2)).textContent = '✓ Done'; $('badge'+year.slice(2)).className = 'badge done';
+      $('card'+year.slice(2)).classList.add('done'); $('cd'+year.slice(2)).innerHTML = '';
+      return;
+    }
+    const v = [Math.floor(diff/864e5), Math.floor(diff%864e5/36e5), Math.floor(diff%36e5/6e4), Math.floor(diff%6e4/1e3)];
+    $('cd'+year.slice(2)).innerHTML = ['days','hours','mins','secs'].map((l,i)=>`<div><b>${v[i]}</b><span>${l}</span></div>`).join('');
+  }
+  function tick(){
+    $('since25').textContent = Math.floor((new Date() - d25) / 864e5) + ' days ago. It was a hard year but also a beautiful one';
+    countdown('2026'); countdown('2027');
+  }
+  tick(); setInterval(tick,1000);
+
+  /* ---- letter ---- */
+  const intro = [
+    'لولو','انا بجد بعشقك اوي','مش عارف أقلك ايه ولا ايه','انت مش متخيلة بجد انا بعشقك قد ايه',
+    'بعشق صوتك , عيونك , كلامك , طريقتك , عشوائيتك , ذكائك , غلاستك , شكلك , خدودك , فخادك , شفايفك',
+    'بحب العب معاكي','بحب اكلمك','بحب لما بنcall','بحب لما بتحكيلي','بحب لما بتكوني good girl 👀👀👀','بحب لما بتبوسيني',
+    'بعشقك شكلك','بعشقك جسمك','بعشقك لما بتكوني مستثارة','معرفش اذا كان بوضج ده او لا',
+    'بس بجد انت مش متخيلة قد ايه انت غالية عندي',
+    'ولله لو عايزة عيوني متغلاش عليك , ولو اني مش عارف ملاك زيك هيحتاج عيوني ف ايه',
+    'سعات بستثا- تؤتؤتؤ دي وحشة','سعات كتير بهيج بسببك','بحب لما بنdirty talk','بجد انا بعشقك اوي يا مزتي',
+    'بحب بجد لما بتحكيلي عندك','اقلك اني بكون بفكر فيكي 24?','ولا اقلك انك السبب ف اني أكون مالك الي موجود دلوقتي',
+    'كل ما افتكر الي عشناه سوا من ديس ل انستا ل ديس ل انستا ل بينتريست ل روب ل ديس ل واتس بتاكد ساعتها ناي بجد بعشقك اوي'
+  ];
+  const why = [
+    'عشان بحب ضحكتك','عشان بحب ابتسامتك','عشان بحب عيونك','عشان بحب طريقة كلامك','عشان بحب طربقة تفكيرك','عشان بحب صبرك عليا',
+    'عشان بحب حنيتك','عشان بحب طيبتك','عشان بحب ذكائك','عشان بحب صوتك','عشان بحب لما بتقولي اسمي','عشان بحب لما تسمعيني',
+    'عشان بحب انك بتفهميني و تتفهميني','عشان بحب لما بتقوليلي انك بتحبيني','عشان بحب ثقتك فيا','عشان بحب لما بتكوني سكرانة',
+    'عشان بحب عشوائيتك','عشان بحب احتوائك ليا','عشان بحب تذكرك لالتفاصيل','عشان بحب فويساتك','عشان بحب صورك','عشان بحب كلامك',
+    'عشان بحب افكارك','عشان بحب غيرتك','عشان بحب اسمك','عشان بحب حياتك','عشان بحب ضحكك على كلامي','عشان بحب كونك طفلة',
+    'عشان بحب لما بتحكيلي','عشان بحب لما ادفعلك حاجة','عشان بحب لما تطبي مني حاجة','عشان بحب لما تطلبي مساعدة',
+    'عشان بحب لما بتثقي فيا','عشان بحب تحمسك و طريقتك لما تتحمسي','عشان بحب صوتك و انت نايمة او تعبانة'
+  ];
+  $('letterBody').innerHTML =
+    intro.map(t=>`<div>${t}</div>`).join('') +
+    '<h3>ليه بهتم ليكي ؟</h3>' +
+    why.map(t=>`<div class="r-item">${t}</div>`).join('') +
+    '<h3>ملخصا</h3><div class="final">عشان بحبك يا عالية ♥</div>';
+
+  const io = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{threshold:.3});
+  $('openBtn').addEventListener('click',()=>{
+    const open = $('letter').classList.toggle('open');
+    $('openBtn').textContent = open ? 'Close the letter' : 'Open the letter 💌';
+    if(open){ burst(8); document.querySelectorAll('.r-item').forEach(el=>io.observe(el)); }
+  });
+
+  /* ---- game 1: catch hearts ---- */
+  let cScore=0, cLeft=20, cTimer=null, cSpawn=null;
+  $('cStart').addEventListener('click',()=>{
+    clearInterval(cTimer); clearInterval(cSpawn); $('catchArea').innerHTML='';
+    cScore=0; cLeft=20; $('cScore').textContent='Score: 0'; $('cTime').textContent='Time: 20'; $('cStart').textContent='Restart';
+    cSpawn = setInterval(()=>{
+      const h=document.createElement('span'); h.className='fall'; h.textContent=Math.random()<.2?'💖':'❤️';
+      h.style.left=(Math.random()*85)+'%'; h.style.animationDuration=(2+Math.random()*1.5)+'s';
+      const hit=e=>{ e.preventDefault(); cScore++; $('cScore').textContent='Score: '+cScore; h.remove(); };
+      h.addEventListener('pointerdown',hit); h.addEventListener('animationend',()=>h.remove());
+      $('catchArea').appendChild(h);
+    },480);
+    cTimer = setInterval(()=>{
+      cLeft--; $('cTime').textContent='Time: '+cLeft;
+      if(cLeft<=0){ clearInterval(cTimer); clearInterval(cSpawn); $('catchArea').innerHTML='';
+        $('cTime').textContent='Time\'s up!'; $('cScore').textContent='Final score: '+cScore; burst(10); }
+    },1000);
+  });
+
+  /* ---- game 2: memory ---- */
+  let mOpen=[], mMoves=0, mDone=0, mLock=false;
+  function mBuild(){
+    mOpen=[]; mMoves=0; mDone=0; mLock=false; $('mStatus').textContent='Moves: 0';
+    const deck=[...'💖🎂🌸🎈🐱🍓',...'💖🎂🌸🎈🐱🍓'].sort(()=>Math.random()-.5);
+    $('mGrid').innerHTML='';
+    deck.forEach(s=>{
+      const b=document.createElement('button'); b.className='mc'; b.textContent=s;
+      b.addEventListener('click',()=>{
+        if(mLock||b.classList.contains('up')) return;
+        b.classList.add('up'); mOpen.push(b);
+        if(mOpen.length===2){
+          mMoves++; $('mStatus').textContent='Moves: '+mMoves;
+          const [x,y]=mOpen;
+          if(x.textContent===y.textContent){ x.classList.add('ok'); y.classList.add('ok'); mOpen=[]; if(++mDone===6){ $('mStatus').textContent='Done in '+mMoves+' moves 🎉'; burst(10);} }
+          else { mLock=true; setTimeout(()=>{ x.classList.remove('up'); y.classList.remove('up'); mOpen=[]; mLock=false; },700); }
+        }
+      });
+      $('mGrid').appendChild(b);
+    });
+  }
+  $('mReset').addEventListener('click',mBuild); mBuild();
+
+  /* ---- game 3: candles ---- */
+  function lightCandles(){ $('candles').innerHTML='<span>🕯️</span>'.repeat(5); $('wishMsg').textContent='Close your eyes, make a wish, then blow.'; $('blowBtn').textContent='Blow the candles 💨'; }
+  lightCandles();
+  $('blowBtn').addEventListener('click',()=>{
+    const cs=[...$('candles').children];
+    if(cs.every(c=>c.classList.contains('off'))){ lightCandles(); return; }
+    cs.forEach((c,i)=>setTimeout(()=>c.classList.add('off'),i*250));
+    setTimeout(()=>{ $('wishMsg').textContent='May every wish come true, Alia. Happy birthday! 🎂'; $('blowBtn').textContent='Light them again'; burst(16); },1400);
+  });
+</script>
+</body>
+</html>
